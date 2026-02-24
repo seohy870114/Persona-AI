@@ -25,7 +25,19 @@ if not api_key:
 else:
     genai.configure(api_key=api_key)
 
-model = genai.GenerativeModel('gemini-pro')
+# 기존 모델 선언 부분을 아래와 같이 수정해서 로그를 확인합니다.
+try:
+    # 현재 사용 가능한 모델 목록을 로그에 출력합니다.
+    print("--- 사용 가능한 모델 목록 ---")
+    for m in genai.list_models():
+        if 'generateContent' in m.supported_generation_methods:
+            print(f"사용 가능 모델: {m.name}")
+    print("---------------------------")
+except Exception as e:
+    print(f"모델 목록 확인 실패: {e}")
+
+# 일단 가장 최신 명칭인 1.5 Flash를 다시 시도하되, 'models/'를 붙여봅니다.
+model = genai.GenerativeModel('models/gemini-pro')
 
 # Master Prompt: Safety and Education Guidelines
 MASTER_PROMPT = """
