@@ -37,7 +37,7 @@ except Exception as e:
     print(f"모델 목록 확인 실패: {e}")
 
 # 일단 가장 최신 명칭인 1.5 Flash를 다시 시도하되, 'models/'를 붙여봅니다.
-model = genai.GenerativeModel('gemini-1.5-flash')
+model = genai.GenerativeModel('models/gemini-2.0-flash')
 
 # Master Prompt: Safety and Education Guidelines
 MASTER_PROMPT = """
