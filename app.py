@@ -37,7 +37,7 @@ except Exception as e:
     print(f"모델 목록 확인 실패: {e}")
 
 # 일단 가장 최신 명칭인 1.5 Flash를 다시 시도하되, 'models/'를 붙여봅니다.
-model = genai.GenerativeModel('models/gemini-pro')
+model = genai.GenerativeModel('gemini-1.5-flash')
 
 # Master Prompt: Safety and Education Guidelines
 MASTER_PROMPT = """
@@ -59,6 +59,14 @@ class ChatRequest(BaseModel):
 async def read_root(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
+@app.get("/check")
+async def check_models():
+    try:
+        models = [m.name for m in genai.list_models() if 'generateContent' in m.supported_generation_methods]
+        return {"status": "success", "available_models": models}
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
+        
 @app.post("/chat")
 async def chat(request: ChatRequest):
     try:
