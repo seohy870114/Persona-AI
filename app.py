@@ -51,10 +51,10 @@ async def read_root(request: Request):
 async def chat(request: ChatRequest):
     try:
         # Combine Master Prompt + User Persona
-        system_instruction = f"{MASTER_PROMPT}
+        system_instruction = f"""{MASTER_PROMPT}
 
 Your current persona is: {request.persona}
-Act according to this persona while maintaining safety rules."
+Act according to this persona while maintaining safety rules."""
         
         # In a real streaming scenario, we'd use model.generate_content(..., stream=True)
         # For simplicity in this MVP, we'll do a standard response first or a simple generator.
