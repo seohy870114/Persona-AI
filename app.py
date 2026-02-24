@@ -69,6 +69,9 @@ User: {request.message}"""
         
         return {"response": response.text}
     except Exception as e:
+        import traceback
+        print(f"Error occurred: {str(e)}")
+        traceback.print_exc()
         raise HTTPException(status_code=500, detail=str(e))
 
 if __name__ == "__main__":
