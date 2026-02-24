@@ -62,8 +62,8 @@ Act according to this persona while maintaining safety rules."""
         chat_session = model.start_chat(history=request.history)
         
         # Prepend the system instruction as context if it's a new chat or every time
-        full_prompt = f"[System Context: {system_instruction}]
-User: {request.message}"
+        full_prompt = f"""[System Context: {system_instruction}]
+User: {request.message}"""
         
         response = chat_session.send_message(full_prompt)
         
