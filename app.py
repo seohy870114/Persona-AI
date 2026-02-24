@@ -13,8 +13,8 @@ load_dotenv()
 app = FastAPI()
 
 # static files and templates setup
-app.mount("/static", StaticFiles(directory="Persona-AI/static"), name="static")
-templates = Jinja2Templates(directory="Persona-AI/templates")
+app.mount("/static", StaticFiles(directory="static"), name="static")
+templates = Jinja2Templates(directory="templates")
 
 # Configure Gemini API
 # Make sure to set your GEMINI_API_KEY in the environment
